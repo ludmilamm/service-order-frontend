@@ -1,0 +1,40 @@
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font: normal 100% 'Roboto', Arial, sans-serif;
+    color: $shuttle-gray;
+    width: 100%;
+    height: 100%;
+}
+
+.title, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', 'Roboto', Arial, sans-serif;
+    color: $allports
+}
+
+.btn-primary, .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled):active {
+    background: $ecstasy;
+    border: none;
+}
+
+.btn-outline-primary:hover, .btn-primary:hover {
+    background: lighten($ecstasy, 15%);
+    border: none;
+}
+
+.btn-outline-primary.focus, .btn-outline-primary:focus, .btn-primary.focus, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(238, 145, 6, 0.397);
+}
+
+.btn-outline-primary {
+    color: $ecstasy;
+    border-color: $ecstasy;
+}
+
+.highlight {
+    color: $prussian-blue;
+}

@@ -1,0 +1,10 @@
+@import '../../../scss/_variables';
+
+div {
+    text-align: center;
+}
+
+.page-item.active .page-link {
+    background: $ecstasy;
+    border: none;
+}

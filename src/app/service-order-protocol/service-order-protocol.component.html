@@ -1,0 +1,43 @@
+<h5 class="mb-5">Protocolo</h5>
+<div class="row">
+  <div class="col-md-6 mb-1">
+    <span class="highlight">Paciente: </span>
+    {{serviceOrder.patient?.name}}
+  </div>
+  <div class="col-md-6 mb-1">
+    <span class="highlight">Convênio: </span>
+    {{serviceOrder.healthInsurance?.description}}
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 mb-1">
+    <span class="highlight">Médico:</span>
+    {{serviceOrder.doctor?.name}}
+  </div>
+  <div class="col-md-6 mb-1">
+    <span class="highlight">Posto de coleta:</span>
+    {{serviceOrder.collectionPoint?.description}}
+  </div>
+</div>
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col" class="highlight">Nº</th>
+      <th scope="col" class="highlight">Exame</th>
+      <th scope="col" class="highlight">Data</th>
+      <th scope="col" class="highlight" *ngIf="isPaid">Preço</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let exam of serviceOrder.exams">
+      <td scope="row">{{exam.id}}</td>
+      <td>{{exam.exam?.description}}</td>
+      <td>{{exam.resultDate | date: 'dd/MM/yyyy hh:mm'}}</td>
+      <td *ngIf="isPaid">{{exam.price | currency: 'BRL'}}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="d-flex justify-content-center mt-5">
+  <button class="btn btn-primary mr-2" (click)="print()">Imprimir</button>
+  <button class="btn btn-success ml-2" (click)="exit()">Finalizar</button>
+</div>

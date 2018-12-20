@@ -1,0 +1,46 @@
+@import '../../scss/_variables';
+
+div {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient($dodger-blue-2, $dodger-blue-1);
+}
+
+mat-card {
+    width: 40vw;
+    height: 45vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    img {
+        max-width: 50px;
+        display: block;
+        margin: auto;
+        margin-bottom: 10px;
+    }
+
+    mat-select {
+        margin-top: 10px;
+    }
+
+    button {
+        width: 140px;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 100vw
+    }
+
+    @media screen and (max-height: 500px) and (max-width: 800px) {
+        height: 55vh
+    }
+}

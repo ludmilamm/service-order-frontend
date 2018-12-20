@@ -1,0 +1,46 @@
+<h5 class="mb-5">Nova ordem de serviço:</h5>
+<form [formGroup]="formGroup">
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field>
+        <mat-select placeholder="Escolha um paciente" formControlName="patientControl" required>
+          <mat-option *ngFor="let patient of patients" [value]="patient" (click)="choosePatient(patient.id)">
+            {{patient.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="patientControl.hasError('required')">Por favor, escolha um paciente.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field>
+        <mat-select placeholder="Escolha um médico" formControlName="doctorControl" required>
+          <mat-option *ngFor="let doctor of doctors" [value]="doctor" (click)="chooseDoctor(doctor.id)">
+            {{doctor.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="doctorControl.hasError('required')">Por favor, escolha um médico.</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field>
+        <mat-select placeholder="Escolha um convênio" formControlName="healthInsuranceControl" required>
+          <mat-option *ngFor="let healthInsurance of healthInsurances" [value]="healthInsurance" (click)="chooseHealthInsurance(healthInsurance.id)">
+            {{healthInsurance.description}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="healthInsuranceControl.hasError('required')">Por favor, escolha um convênio.</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-tab-group>
+    <mat-tab *ngFor="let exam of examsBySector" label="{{exam.sector}}">
+      <div class="pl-3 pt-2 pb-1" *ngFor="let exam of exam.exams">
+        <mat-checkbox (click)="checkExam(exam.id)">{{exam.description}} - {{exam.deadline}} dias</mat-checkbox>
+      </div>
+      <mat-error *ngIf="showExamsError" class="pl-3">Por favor, escolha um exame.</mat-error>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="d-flex justify-content-center mt-5">
+    <button class="btn btn-primary" (click)="onSaveServiceOrderClick()">Salvar</button>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+<div>
+  <mat-card>
+    <img src="assets/images/lab.svg" alt="">
+    <h3>Escolha seu posto de coleta:</h3>
+    <mat-select placeholder="Selecione">
+      <mat-option *ngFor="let collectionPoint of collectionPoints" 
+        [value]="collectionPoint.description" (click)="chooseCollectionPoint(collectionPoint)">
+        {{collectionPoint.description}}
+      </mat-option>
+    </mat-select>
+    <button class="btn btn-primary" (click)="onNextButtonClick()">Prosseguir</button>
+  </mat-card>
+</div>

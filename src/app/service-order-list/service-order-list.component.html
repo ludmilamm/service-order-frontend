@@ -1,0 +1,99 @@
+<div>
+  <h5 class="mb-5 float-left">Ordens de serviço:</h5>
+  <button class="btn btn-primary float-right" (click)="onAddClick()">Adicionar</button>
+</div>
+<div class="input-group mb-3">
+  <input type="text" [(ngModel)]="searchPatient" class="form-control" placeholder="Buscar paciente" (keydown)="onEnterSearchField($event)">
+  <div class="input-group-append">
+    <button class="btn btn-outline-primary" (click)="getServiceOrders()">Buscar</button>
+  </div>
+</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let serviceOrder of serviceOrders">
+    <mat-expansion-panel-header>
+      <div class="row">
+        <div class="col-md-8 highlight">{{serviceOrder.patient?.name}}</div>
+        <div class="col-md-4">{{serviceOrder.date | date:'fullDate' }}</div>
+      </div> 
+    </mat-expansion-panel-header>
+    <section>
+      <div class="row">
+        <div class="col-md-12">
+          <span class="highlight">Endereço:</span> 
+          {{serviceOrder.patient?.address}}, 
+          {{serviceOrder.patient?.neighborhood?.description}}, 
+          {{serviceOrder.patient?.neighborhood?.city?.description}}, 
+          {{serviceOrder.patient?.neighborhood?.city?.state}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <span class="highlight">Data de nascimento:</span>
+          {{serviceOrder.patient?.birthdate | date:'dd/MM/yyyy'}}
+        </div>
+        <div class="col-md-6">
+          <span class="highlight">Convênio:</span>
+          {{serviceOrder.healthInsurance?.description}}
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <span class="highlight">Médico:</span> 
+          {{serviceOrder.doctor?.name}}
+        </div>
+        <div class="col-md-6">
+          <span class="highlight">Especialidade:</span>
+          {{serviceOrder.doctor?.specialty?.description}}
+        </div>
+      </div>
+      <div *ngFor="let exam of serviceOrder.exams">
+        <hr>
+        <div class="row mb-2">
+          <div class="col-md-12" [ngSwitch]="exam.status">
+            <span class="highlight">Status: </span>
+            <span *ngSwitchCase="'waiting'">Aguardando Coleta</span>
+            <span *ngSwitchCase="'processing'">Processando</span>
+            <span *ngSwitchCase="'canceled'">Cancelado</span>
+            <span *ngSwitchCase="'available'">Disponível</span>
+            <span *ngSwitchCase="'taken'">Retirado</span>
+            <button class="ml-2 btn btn-outline-success" title="Trocar status" (click)="onStatusUpdateClick(exam)" 
+              *ngIf="exam.status !== 'taken' && exam.status !== 'canceled'">>></button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <span class="highlight">Número de protocolo:</span>
+            {{exam.id}}
+          </div>
+          <div class="col-md-6">
+            <span class="highlight">Nome:</span>
+            {{exam.exam?.description}}
+          </div>
+        </div> 
+        <div class="row">
+          <div class="col-md-6">
+            <span class="highlight">Setor:</span>
+            {{exam.exam?.sector.description}}
+          </div>
+          <div class="col-md-6">
+            <span class="highlight">Material biológico:</span>
+            {{exam.exam?.biologicalMaterial}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <span class="highlight">Data de entrega:</span>
+            {{exam.resultDate | date:'dd/MM/yyyy hh:mm'}}
+          </div>
+          <div class="col-md-6">
+            <span class="highlight">Preço:</span>
+            {{exam.price | currency:'BRL' }}
+          </div>
+        </div> 
+      </div>
+    </section>
+  </mat-expansion-panel>
+</mat-accordion>
+<div class="pb-3"></div>
+<app-paginator [numberOfPages]="pages" (pageChange)="onNextPageClick($event)"></app-paginator>

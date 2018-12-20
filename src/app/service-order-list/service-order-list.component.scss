@@ -1,0 +1,13 @@
+@import '../../scss/_variables';
+
+mat-expansion-panel-header {
+    color: $shuttle-gray;
+    font-weight: bolder;
+    .row {
+        width: 100%;
+    }
+}
+
+section {
+    color: $shuttle-gray;
+}

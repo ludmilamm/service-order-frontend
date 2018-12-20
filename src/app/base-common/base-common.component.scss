@@ -1,0 +1,23 @@
+@import '../../scss/_variables';
+
+.navbar {
+    background: linear-gradient(to right, $dodger-blue-2, $dodger-blue-1);
+
+    .navbar-brand {
+        color: white;
+        font-family: 'Source Sans Pro', Arial, sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+
+        img {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+        }
+    }
+}
+
+.container {
+    margin-top: 75px;
+    height: 89vh;
+}
